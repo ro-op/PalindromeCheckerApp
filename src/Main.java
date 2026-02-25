@@ -7,27 +7,20 @@ public class Main {
         System.out.println("Version : 1.0");
         System.out.println("System initialized successfully.\n");
 
-        // UC2: Hardcoded Palindrome Check
-        String word = "madam";
-        boolean isPalindrome = true;
+        // UC3: Palindrome Check Using String Reverse
+        String original = "madam";
+        String reversed = "";
 
-        int start = 0;
-        int end = word.length() - 1;
-
-        while (start < end) {
-            if (word.charAt(start) != word.charAt(end)) {
-                isPalindrome = false;
-                break;
-            }
-            start++;
-            end--;
+        // Reverse the string using a for loop
+        for (int i = original.length() - 1; i >= 0; i--) {
+            reversed = reversed + original.charAt(i);
         }
 
-        // Result Output
-        if (isPalindrome) {
-            System.out.println(word + " is a Palindrome");
+        // Compare original and reversed strings
+        if (original.equals(reversed)) {
+            System.out.println(original + " is a Palindrome");
         } else {
-            System.out.println(word + " is NOT a Palindrome");
+            System.out.println(original + " is NOT a Palindrome");
         }
     }
 }
