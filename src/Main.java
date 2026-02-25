@@ -1,40 +1,47 @@
-public class Main {
+/**
+ * ============================================================
+ * UC11 - Object-Oriented Palindrome Service (Single File)
+ * ============================================================
+ */
 
-    public static void main(String[] args) {
+class PalindromeChecker {
 
-        // UC1: Welcome Message
-        System.out.println("Welcome to the Palindrome Checker Management System");
-        System.out.println("Version : 1.0");
-        System.out.println("System initialized successfully.\n");
+    // Encapsulated palindrome logic
+    public boolean checkPalindrome(String input) {
 
-        // UC10: Case-Insensitive & Space-Ignored Palindrome Check
-        String input = "Madam In Eden Im Adam";
-
-        // Step 1: Normalize string (remove spaces, convert to lowercase)
-        String normalized = input.replaceAll("\\s+", "").toLowerCase();
-
-        boolean isPalindrome = isPalindrome(normalized);
-
-        // Print result
-        if (isPalindrome) {
-            System.out.println("\"" + input + "\" is a Palindrome");
-        } else {
-            System.out.println("\"" + input + "\" is NOT a Palindrome");
+        if (input == null) {
+            return false;
         }
-    }
 
-    // Palindrome check using two-pointer technique
-    private static boolean isPalindrome(String word) {
         int start = 0;
-        int end = word.length() - 1;
+        int end = input.length() - 1;
 
         while (start < end) {
-            if (word.charAt(start) != word.charAt(end)) {
+            if (input.charAt(start) != input.charAt(end)) {
                 return false;
             }
             start++;
             end--;
         }
         return true;
+    }
+}
+
+public class Main {
+
+    public static void main(String[] args) {
+
+        System.out.println("Welcome to the Palindrome Checker System\n");
+
+        String input = "madam";
+
+        PalindromeChecker checker = new PalindromeChecker();
+        boolean result = checker.checkPalindrome(input);
+
+        if (result) {
+            System.out.println("\"" + input + "\" is a Palindrome");
+        } else {
+            System.out.println("\"" + input + "\" is NOT a Palindrome");
+        }
     }
 }
