@@ -7,20 +7,29 @@ public class Main {
         System.out.println("Version : 1.0");
         System.out.println("System initialized successfully.\n");
 
-        // UC3: Palindrome Check Using String Reverse
-        String original = "madam";
-        String reversed = "";
+        // UC4: Character Array Based Palindrome Check
+        String word = "madam";
+        char[] characters = word.toCharArray();
 
-        // Reverse the string using a for loop
-        for (int i = original.length() - 1; i >= 0; i--) {
-            reversed = reversed + original.charAt(i);
+        boolean isPalindrome = true;
+        int start = 0;
+        int end = characters.length - 1;
+
+        // Two-pointer comparison
+        while (start < end) {
+            if (characters[start] != characters[end]) {
+                isPalindrome = false;
+                break;
+            }
+            start++;
+            end--;
         }
 
-        // Compare original and reversed strings
-        if (original.equals(reversed)) {
-            System.out.println(original + " is a Palindrome");
+        // Display result
+        if (isPalindrome) {
+            System.out.println(word + " is a Palindrome");
         } else {
-            System.out.println(original + " is NOT a Palindrome");
+            System.out.println(word + " is NOT a Palindrome");
         }
     }
 }
