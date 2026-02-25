@@ -1,9 +1,3 @@
-/**
- * ============================================================
- * UC11 - Object-Oriented Palindrome Service (Single File)
- * ============================================================
- */
-
 class PalindromeChecker {
 
     // Encapsulated palindrome logic
