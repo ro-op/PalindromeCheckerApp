@@ -1,41 +1,80 @@
-class PalindromeChecker {
+import java.util.*;
+/* ---------- Strategy Interface ---------- */
+interface PalindromeStrategy {
+    boolean isPalindrome(String input);
+}
 
-    // Encapsulated palindrome logic
-    public boolean checkPalindrome(String input) {
+/* ---------- Stack-Based Strategy ---------- */
+class StackStrategy implements PalindromeStrategy {
 
-        if (input == null) {
-            return false;
+    @Override
+    public boolean isPalindrome(String input) {
+        Stack<Character> stack = new Stack<>();
+
+        for (char ch : input.toCharArray()) {
+            stack.push(ch);
         }
 
-        int start = 0;
-        int end = input.length() - 1;
+        String reversed = "";
+        while (!stack.isEmpty()) {
+            reversed += stack.pop();
+        }
 
-        while (start < end) {
-            if (input.charAt(start) != input.charAt(end)) {
+        return input.equals(reversed);
+    }
+}
+
+/* ---------- Deque-Based Strategy ---------- */
+class DequeStrategy implements PalindromeStrategy {
+
+    @Override
+    public boolean isPalindrome(String input) {
+        Deque<Character> deque = new ArrayDeque<>();
+
+        for (char ch : input.toCharArray()) {
+            deque.addLast(ch);
+        }
+
+        while (deque.size() > 1) {
+            if (deque.removeFirst() != deque.removeLast()) {
                 return false;
             }
-            start++;
-            end--;
         }
         return true;
     }
 }
 
+/* ---------- Context Class ---------- */
+class PalindromeChecker {
+
+    private PalindromeStrategy strategy;
+
+    public void setStrategy(PalindromeStrategy strategy) {
+        this.strategy = strategy;
+    }
+
+    public boolean check(String input) {
+        return strategy.isPalindrome(input);
+    }
+}
+
+/* ---------- Main Class ---------- */
 public class Main {
 
     public static void main(String[] args) {
 
-        System.out.println("Welcome to the Palindrome Checker System\n");
-
         String input = "madam";
 
         PalindromeChecker checker = new PalindromeChecker();
-        boolean result = checker.checkPalindrome(input);
 
-        if (result) {
-            System.out.println("\"" + input + "\" is a Palindrome");
-        } else {
-            System.out.println("\"" + input + "\" is NOT a Palindrome");
-        }
+        // Strategy 1: Stack
+        checker.setStrategy(new StackStrategy());
+        System.out.println("Using Stack Strategy: "
+                + checker.check(input));
+
+        // Strategy 2: Deque
+        checker.setStrategy(new DequeStrategy());
+        System.out.println("Using Deque Strategy: "
+                + checker.check(input));
     }
 }
