@@ -1,31 +1,32 @@
-public class Main {
-
+import java.util.Stack;
+public class Main{
     public static void main(String[] args) {
-
         // UC1: Welcome Message
         System.out.println("Welcome to the Palindrome Checker Management System");
         System.out.println("Version : 1.0");
         System.out.println("System initialized successfully.\n");
 
-        // UC4: Character Array Based Palindrome Check
+        // UC5: Stack-Based Palindrome Check
         String word = "madam";
-        char[] characters = word.toCharArray();
+
+        Stack<Character> stack = new Stack<>();
+
+        // Push characters into stack
+        for (int i = 0; i < word.length(); i++) {
+            stack.push(word.charAt(i));
+        }
 
         boolean isPalindrome = true;
-        int start = 0;
-        int end = characters.length - 1;
 
-        // Two-pointer comparison
-        while (start < end) {
-            if (characters[start] != characters[end]) {
+        // Pop characters and compare
+        for (int i = 0; i < word.length(); i++) {
+            if (word.charAt(i) != stack.pop()) {
                 isPalindrome = false;
                 break;
             }
-            start++;
-            end--;
         }
 
-        // Display result
+        // Print result
         if (isPalindrome) {
             System.out.println(word + " is a Palindrome");
         } else {
